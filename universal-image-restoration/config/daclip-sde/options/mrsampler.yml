@@ -1,0 +1,58 @@
+name: mrsampler # experiment dir name
+suffix: ~  # add suffix to saved images
+model: denoising
+distortion: [motion-blurry,hazy,jpeg-compressed,low-light,noisy,raindrop,rainy,shadowed,snowy,uncompleted] # uncompleted means inpainting
+gpu_ids: [0]
+
+sde:
+  max_sigma: 50
+  T: 100
+  schedule: cosine # linear, cosine
+  eps: 0.005
+  algorithm: mrsampler # sde or posterior or mrsampler or heun, sde means euler descritization
+  
+degradation:
+  # for denoising
+  sigma: 25
+  noise_type: G # Gaussian noise: G
+
+  # for super-resolution
+  scale: 4
+
+datasets:
+  test1:
+   name: uncompleted # choose from [motion-blurry,hazy,jpeg-compressed,low-light,noisy,raindrop,rainy,shadowed,snowy,uncompleted]
+   mode: LQGT
+   dataroot_GT: your/path/to/dataset/uncompleted/GT
+   dataroot_LQ: your/path/to/dataset/uncompleted/LQ
+  
+#### network structures
+network_G:
+  which_model_G: ConditionalUNet
+  setting:
+    in_nc: 3
+    out_nc: 3
+    nf: 64
+    ch_mult: [1, 2, 4, 8]
+    context_dim: 512
+    use_degra_context: true
+    use_image_context: true
+
+#### pretrained model path
+path:
+  pretrain_model_G: your/path/to/pretrained_models/universal-ir.pth
+  daclip: your/path/to/pretrained_models/daclip_ViT-B-32.pt
+
+#### configs for sampler
+sampler:
+  num_sample_steps: 20
+  solver_type: ode # sde or ode
+  parameterization: "data"
+  order: 2
+  fit_target: noise
+  lambda_min: -5.0
+  time_schedule: linspace
+  thresholding: False # only for data prediction
+  threshold_ratio: 0.995
+  threshold_max: 1.5
+  denoise_last: False
