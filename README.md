@@ -80,7 +80,7 @@ To evalute our method, remember to modify the parameters in config files like `u
 
 Run the evaluation as follows:
 ```bash
-cd universal-image-restoration/config/universal-ir
+cd universal-image-restoration/config/daclip-sde
 python test.py -opt=options/test.yml
 ```
 We also provide the corresponding parameter collocations of the sampling algorithms compared in the paper, including `posterior.yml`/`euler.yml`/`mrsampler.yml`. Don't forget to modify sampling algorithm, dataset path and sampler config.
