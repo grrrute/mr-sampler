@@ -61,7 +61,7 @@ class MRSampler():
         fit_target: training method, can be "data", "noise", "velocity"
         thresholding: whether to use the "_clip_out" method, only for data prediction
         lambda_min: clipping threshold for the minimum value of `lambda(t)` for numerical stability. This is critical for the cosine (`squaredcos_cap_v2`) noise schedule
-        time_schedule: str, can be ["linspace", "leading", "trailing", "karras-n", "karras-t"], according to Table.2 of https://arxiv.org/abs/2305.08891
+        time_schedule: str, can be ["linspace", "leading", "trailing", "karras-n", "karras-t", "linear-lambda"], according to Table.2 of https://arxiv.org/abs/2305.08891
         timestep_offset: int, offset for the time steps
         rho: float, rho for the karras noise schedule
         threshold_ratio: the ratio for clipping model output, disable if thresholding is False
@@ -121,7 +121,7 @@ class MRSampler():
         karras_times = (t_max**(1/self.rho) + i*(t_min**(1/self.rho) - t_max**(1/self.rho)))**self.rho
         return karras_times
     
-    def sigmas_to_timesteps(self, karras_sigmas:np.ndarray) -> NDArray[int]:
+    def sigmas_to_timesteps(self, karras_sigmas:np.ndarray) -> NDArray[np.int]:
         """
         convert karras sigmas to timesteps, descending order\n
         timesteps[i] = t with karras_sigmas[i]==_sigmas[t]
