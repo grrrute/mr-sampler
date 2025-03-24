@@ -1,9 +1,9 @@
-## MRS: A Fast Sampler for Mean Reverting Diffusion Based on ODE and SDE Solvers <br><sub>Official PyTorch Implementation. </sub>
+## MaRS: A Fast Sampler for Mean Reverting Diffusion Based on ODE and SDE Solvers <br><sub>Official PyTorch Implementation. </sub>
 
 ICLR 2025 Spotlight | [paper](https://arxiv.org/abs/2502.07856)
 
 **Abstract.**
-In applications of diffusion models, controllable generation is of practical significance, but is also challenging. Current methods for controllable generation primarily focus on modifying the score function of diffusion models, while Mean Reverting (MR) Diffusion directly modifies the structure of the stochastic differential equation (SDE), making the incorporation of image conditions simpler and more natural. However, current training-free fast samplers are not directly applicable to MR Diffusion. And thus MR Diffusion requires hundreds of NFEs (number of function evaluations) to obtain high-quality samples. In this paper, we propose a new algorithm named MRS (MR Sampler) to reduce the sampling NFEs of MR Diffusion. We solve the reverse-time SDE and the probability flow ordinary differential equation (PF-ODE) associated with MR Diffusion, and derive semi-analytical solutions. The solutions consist of an analytical function and an integral parameterized by a neural network. Based on this solution, we can generate high-quality samples in fewer steps. Our approach does not require training and supports all mainstream parameterizations, including noise prediction, data prediction and velocity prediction. Extensive experiments demonstrate that MR Sampler maintains high sampling quality with a speedup of 10 to 20 times across ten different image restoration tasks. Our algorithm accelerates the sampling procedure of MR Diffusion, making it more practical in controllable generation.
+In applications of diffusion models, controllable generation is of practical significance, but is also challenging. Current methods for controllable generation primarily focus on modifying the score function of diffusion models, while Mean Reverting (MR) Diffusion directly modifies the structure of the stochastic differential equation (SDE), making the incorporation of image conditions simpler and more natural. However, current training-free fast samplers are not directly applicable to MR Diffusion. And thus MR Diffusion requires hundreds of NFEs (number of function evaluations) to obtain high-quality samples. In this paper, we propose a new algorithm named MaRS (MR Sampler) to reduce the sampling NFEs of MR Diffusion. We solve the reverse-time SDE and the probability flow ordinary differential equation (PF-ODE) associated with MR Diffusion, and derive semi-analytical solutions. The solutions consist of an analytical function and an integral parameterized by a neural network. Based on this solution, we can generate high-quality samples in fewer steps. Our approach does not require training and supports all mainstream parameterizations, including noise prediction, data prediction and velocity prediction. Extensive experiments demonstrate that MR Sampler maintains high sampling quality with a speedup of 10 to 20 times across ten different image restoration tasks. Our algorithm accelerates the sampling procedure of MR Diffusion, making it more practical in controllable generation.
 
 ![MRSampler](figs/intro.png)
 
@@ -104,7 +104,7 @@ If you find the code useful for your research, please consider citing
 
 ```
 @article{li2025mrs,
-  title={MRS: A Fast Sampler for Mean Reverting Diffusion based on ODE and SDE Solvers},
+  title={MaRS: A Fast Sampler for Mean Reverting Diffusion based on ODE and SDE Solvers},
   author={Li, Ao and Fang, Wei and Zhao, Hongbo and Lu, Le and Yang, Ge and Xu, Minfeng},
   journal={arXiv preprint arXiv:2502.07856},
   year={2025}
